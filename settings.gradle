@@ -36,5 +36,5 @@ rootProject.name = 'classicpipes'
 includeBuild('build-logic')
 include('common')
 include('fabric')
-include('neoforge')
-include('forge')
+// Only configure the Fabric target for the 26.3 migration.
+// Other loaders still target Minecraft 26.2 and are intentionally excluded.
