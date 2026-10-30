@@ -1,7 +1,7 @@
 package jagm.classicpipes.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
+import org.joml.Matrix4f;
 import jagm.classicpipes.blockentity.RecipePipeEntity;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -58,7 +58,7 @@ public class RecipePipeRenderer extends PipeRenderer<RecipePipeEntity> {
                 poses.pushPose();
                 poses.translate(0.5F + xOff, 0.5F + yOff, 0.5F + zOff);
                 poses.scale(0.4375F, 0.4375F, 0.4375F);
-                poses.mulPose(Axis.YP.rotation(pipeState.angles().get(i)));
+                poses.mulPose(new Matrix4f().rotationY(pipeState.angles().get(i)));
                 stackState.submit(poses, queue, pipeState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
                 poses.popPose();
             }
