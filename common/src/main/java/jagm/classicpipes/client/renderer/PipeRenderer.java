@@ -71,9 +71,9 @@ public class PipeRenderer<T extends ItemPipeEntity> implements BlockEntityRender
                 poses.translate(itemState.renderPos());
                 poses.scale(0.4375F, 0.4375F, 0.4375F);
                 if (itemState.direction().equals(Direction.EAST) || itemState.direction().equals(Direction.WEST)) {
-                    poses.mulPose(Axis.YP.rotationDegrees(90.0F));
+                    poses.mulPose(Axis.YP, 90.0F);
                 } else if (itemState.direction().equals(Direction.UP) || itemState.direction().equals(Direction.DOWN)) {
-                    poses.mulPose(Axis.XP.rotationDegrees(90.0F));
+                    poses.mulPose(Axis.XP, 90.0F);
                 }
                 itemState.stackState().submit(poses, queue, pipeState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
                 poses.popPose();
