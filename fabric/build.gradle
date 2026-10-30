@@ -52,3 +52,25 @@ sourceSets.configureEach {
         }
     }
 }
+// Minecraft 26.3 recipe advancement criteria use a recipes array rather than recipe.
+// Rewrite copied resources (not source files) so the Fabric distribution loads worlds.
+tasks.named('processResources') {
+    doLast {
+        def advancementDir = destinationDir.toPath().resolve('data/classicpipes/advancement/recipes').toFile()
+        if (advancementDir.isDirectory()) {
+            advancementDir.eachFileMatch(~/.*\.json/) { file ->
+                def data = new groovy.json.JsonSlurper().parse(file)
+                boolean changed = false
+                data.criteria?.values()?.each { criterion ->
+                    if (criterion.trigger == 'minecraft:recipe_unlocked' && criterion.conditions instanceof Map && criterion.conditions.containsKey('recipe')) {
+                        criterion.conditions.recipes = [criterion.conditions.remove('recipe')]
+                        changed = true
+                    }
+                }
+                if (changed) {
+                    file.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(data)) + '\n'
+                }
+            }
+        }
+    }
+}
