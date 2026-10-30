@@ -2,7 +2,6 @@ package jagm.classicpipes.util;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.predicates.ItemPredicate;
 import net.minecraft.advancements.predicates.MinMaxBounds;
 import net.minecraft.advancements.predicates.entity.EntityPredicate;
@@ -23,7 +22,7 @@ public class RequestItemTrigger extends SimpleCriterionTrigger<RequestItemTrigge
         return RequestItemTriggerInstance.CODEC;
     }
 
-    public record RequestItemTriggerInstance(Optional<ContextAwarePredicate> player, Optional<ItemPredicate> item, Optional<MinMaxBounds.Ints> uniqueItemsCrafted) implements SimpleCriterionTrigger.SimpleInstance {
+    public record RequestItemTriggerInstance(Optional<EntityPredicate> player, Optional<ItemPredicate> item, Optional<MinMaxBounds.Ints> uniqueItemsCrafted) implements SimpleCriterionTrigger.SimpleInstance {
 
         public static final Codec<RequestItemTriggerInstance> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(RequestItemTriggerInstance::player),
