@@ -2,7 +2,7 @@ package jagm.classicpipes.util;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.advancements.predicates.ContextAwarePredicate;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.predicates.ItemPredicate;
 import net.minecraft.advancements.predicates.MinMaxBounds;
 import net.minecraft.advancements.predicates.entity.EntityPredicate;
