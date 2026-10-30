@@ -1,7 +1,7 @@
 package jagm.classicpipes.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
+import org.joml.Quaternionf;
 import jagm.classicpipes.blockentity.ItemPipeEntity;
 import jagm.classicpipes.blockentity.NetworkedPipeEntity;
 import jagm.classicpipes.util.ItemInPipe;
@@ -71,9 +71,9 @@ public class PipeRenderer<T extends ItemPipeEntity> implements BlockEntityRender
                 poses.translate(itemState.renderPos());
                 poses.scale(0.4375F, 0.4375F, 0.4375F);
                 if (itemState.direction().equals(Direction.EAST) || itemState.direction().equals(Direction.WEST)) {
-                    poses.mulPose(Axis.YP, 90.0F);
+                    poses.mulPose(new Quaternionf().rotationY((float) Math.PI / 2));
                 } else if (itemState.direction().equals(Direction.UP) || itemState.direction().equals(Direction.DOWN)) {
-                    poses.mulPose(Axis.XP, 90.0F);
+                    poses.mulPose(new Quaternionf().rotationX((float) Math.PI / 2));
                 }
                 itemState.stackState().submit(poses, queue, pipeState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
                 poses.popPose();
